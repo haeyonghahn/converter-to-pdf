@@ -1,11 +1,6 @@
 package com.github.pdf.converter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -42,6 +37,13 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 		Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfFileConvertParameter.getOriginalFileName()));
 		File file = sourcePath.toFile();
 
+		outputPath = getString(file, tempPath, createFileName);
+		// TODO : 실제 파일이 위치한 경로가 반환되어 보안적인 위험이 존재.
+		return outputPath;
+	}
+
+	private String getString(File file, String tempPath, String createFileName) throws IOException {
+		String outputPath;
 		try (InputStream is = new FileInputStream(file)) {
 			byte[] fileData = IOUtils.toByteArray(is);
 			outputPath = tempPath + "/" + createFileName + ".pdf";
@@ -52,7 +54,6 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 		} catch(FileNotFoundException e) {
 			throw new FileNotFoundException(e.getMessage());
 		}
-		// TODO : 실제 파일이 위치한 경로가 반환되어 보안적인 위험이 존재.
 		return outputPath;
 	}
 
