@@ -1,11 +1,6 @@
 package com.github.pdf.converter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -34,6 +29,15 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 
 	@Override
 	public String convert() throws Exception {
+		Result result = getResult();
+		String outputPath;
+
+		outputPath = getString(result.file, result.tempPath, result.createFileName);
+		// TODO : 실제 파일이 위치한 경로가 반환되어 보안적인 위험이 존재.
+		return outputPath;
+	}
+
+	private Result getResult() {
 		String outputPath;
 		String[] originFileName = pdfConvertParameter.getOriginalFileName().split("\\.");
 		String createFileName = originFileName[0];
@@ -41,7 +45,24 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 		PdfFileConvertParameter pdfFileConvertParameter = (PdfFileConvertParameter) pdfConvertParameter;
 		Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfFileConvertParameter.getOriginalFileName()));
 		File file = sourcePath.toFile();
+		Result result = new Result(createFileName, tempPath, file);
+		return result;
+	}
 
+	private static class Result {
+		public final String createFileName;
+		public final String tempPath;
+		public final File file;
+
+		public Result(String createFileName, String tempPath, File file) {
+			this.createFileName = createFileName;
+			this.tempPath = tempPath;
+			this.file = file;
+		}
+	}
+
+	private String getString(File file, String tempPath, String createFileName) throws IOException {
+		String outputPath;
 		try (InputStream is = new FileInputStream(file)) {
 			byte[] fileData = IOUtils.toByteArray(is);
 			outputPath = tempPath + "/" + createFileName + ".pdf";
@@ -52,7 +73,6 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 		} catch(FileNotFoundException e) {
 			throw new FileNotFoundException(e.getMessage());
 		}
-		// TODO : 실제 파일이 위치한 경로가 반환되어 보안적인 위험이 존재.
 		return outputPath;
 	}
 
