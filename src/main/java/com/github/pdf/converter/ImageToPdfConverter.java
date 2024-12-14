@@ -36,31 +36,23 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 
 	@Override
 	public String convert() throws Exception {
+		String outputPath;
 		String[] originFileName = pdfConvertParameter.getOriginalFileName().split("\\.");
 		String createFileName = originFileName[0];
 		String tempPath = PdfConvertConstant.getTemporaryDirectory();
-		String outputPath;
-		File file;
-		InputStream is = null;
-		try {
-			PdfFileConvertParameter pdfFileConvertParameter = (PdfFileConvertParameter) pdfConvertParameter;
-			Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfFileConvertParameter.getOriginalFileName()));
-			file = sourcePath.toFile();
-			is = new FileInputStream(file);
+		PdfFileConvertParameter pdfFileConvertParameter = (PdfFileConvertParameter) pdfConvertParameter;
+		Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfFileConvertParameter.getOriginalFileName()));
+		File file = sourcePath.toFile();
 
+		try (InputStream is = new FileInputStream(file)) {
 			byte[] fileData = IOUtils.toByteArray(is);
 			outputPath = tempPath + "/" + createFileName + ".pdf";
 			createPdf(fileData, tempPath, createFileName);
-
 			if (pdfConvertParameter.getOwnerPassword() != null && pdfConvertParameter.getUserPassword() != null) {
 				PdfEncrypt.setPdfEncrypt(pdfConvertParameter.getOwnerPassword(), pdfConvertParameter.getUserPassword(), outputPath);
 			}
 		} catch(FileNotFoundException e) {
 			throw new FileNotFoundException(e.getMessage());
-		} finally {
-			if (is != null) {
-				is.close();
-			}
 		}
 		// TODO : 실제 파일이 위치한 경로가 반환되어 보안적인 위험이 존재.
 		return outputPath;

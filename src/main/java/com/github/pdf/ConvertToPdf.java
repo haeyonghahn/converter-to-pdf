@@ -11,6 +11,8 @@ public class ConvertToPdf {
 		PdfFileConvertParameter files = new PdfFileConvertParameter();
 		files.setOriginalFileName("dog.jpg");
 		files.setOriginalExtension("jpg");
+		files.setOwnerPassword("qwer1234");
+		files.setUserPassword("qwer1234");
 		files.setNewFileName(UUID.randomUUID().toString().replaceAll("-", ""));
 
 		String pdf = pdfConverter.toPdf(files);
