@@ -11,6 +11,7 @@ public class PdfConvertStrategyFactory {
 		if ("jpg".equals(fileExtension) || "jpeg".equals(fileExtension)) {
 			imageToPdfConverter = new ImageToPdfConverter(pdfConvertParameter);
 		} else if ("html".equals(fileExtension)) {
+			// TODO : html 파일에서 pdf 파일로 변환 작업
 			imageToPdfConverter = new ImageToPdfConverter(pdfConvertParameter);
 		} else {
 			throw new RuntimeException(fileExtension + " can not be converted!");
