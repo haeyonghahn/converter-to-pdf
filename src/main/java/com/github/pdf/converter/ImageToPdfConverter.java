@@ -1,6 +1,5 @@
 package com.github.pdf.converter;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +19,6 @@ import com.github.pdf.model.PdfFileConvertParameter;
 import com.github.pdf.strategy.PdfConvertStrategy;
 import com.github.pdf.util.PdfEncrypt;
 import com.lowagie.text.Document;
-import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Rectangle;
@@ -59,8 +57,7 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 	}
 
 	private void createPdf(byte[] fileData, String filePath, String createFileName) {
-		try (InputStream is = new ByteArrayInputStream(fileData);
-			 OutputStream out = new FileOutputStream(filePath + "/" + createFileName + ".pdf")) {
+		try (OutputStream out = new FileOutputStream(filePath + "/" + createFileName + ".pdf")) {
 			Rectangle pageSize = getPageSize();
 			Document document = new Document(pageSize, 0.0F, 0.0F, 0.0F, 0.0F);
 			PdfWriter writer = PdfWriter.getInstance(document, out);
@@ -69,7 +66,7 @@ public class ImageToPdfConverter implements PdfConvertStrategy {
 			image.scalePercent((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin()) / image.getWidth() * 100.0F);
 			document.newPage();
 			writer.open();
-			document.add((Element) image);
+			document.add(image);
 			document.close();
 			writer.close();
 		} catch (Exception e) {
