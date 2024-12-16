@@ -1,16 +1,16 @@
-package com.github.pdf.model;
+package com.github.pdf.source;
 
 import com.github.pdf.constant.PdfPageOrientation;
 import com.github.pdf.constant.PdfPageSize;
 
-public abstract class PdfConvertParameter {
+public abstract class PdfSource {
 
 	private String originalFileName;
 	private String originalExtension;
-	private String ownerPassword;
-	private String userPassword;
 	private PdfPageOrientation pdfPageOrientation = PdfPageOrientation.DEFAULT;
 	private PdfPageSize pdfPageSize = PdfPageSize.A4;
+	private byte[] outputFile;
+	private String outputPath;
 
 	public String getOriginalFileName() {
 		return originalFileName;
@@ -28,22 +28,6 @@ public abstract class PdfConvertParameter {
 		this.originalExtension = originalExtension;
 	}
 
-	public String getOwnerPassword() {
-		return ownerPassword;
-	}
-
-	public void setOwnerPassword(String ownerPassword) {
-		this.ownerPassword = ownerPassword;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-
 	public PdfPageOrientation getPdfPageOrientation() {
 		return pdfPageOrientation;
 	}
@@ -58,5 +42,21 @@ public abstract class PdfConvertParameter {
 
 	public void setPdfPageSize(PdfPageSize pdfPageSize) {
 		this.pdfPageSize = pdfPageSize;
+	}
+
+	public byte[] getOutputFile() {
+		return outputFile;
+	}
+
+	public void setOutputFile(byte[] outputFile) {
+		this.outputFile = outputFile;
+	}
+
+	public String getOutputPath() {
+		return outputPath;
+	}
+
+	public void setOutputPath(String outputPath) {
+		this.outputPath = outputPath;
 	}
 }

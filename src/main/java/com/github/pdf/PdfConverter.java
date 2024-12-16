@@ -1,17 +1,27 @@
 package com.github.pdf;
 
-import com.github.pdf.model.PdfConvertParameter;
-import com.github.pdf.strategy.PdfConvertStrategy;
-import com.github.pdf.strategy.PdfConvertStrategyFactory;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.pdf.source.PdfSource;
 
 public class PdfConverter {
 
-	public String toPdf(PdfConvertParameter pdfConvertParameter) {
-		try {
-			PdfConvertStrategy pdfConvertStrategy = PdfConvertStrategyFactory.getStrategy(pdfConvertParameter);
-			return pdfConvertStrategy.convert();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+	private PdfSource pdfSource;
+	private List<PdfConvertModule> modules = new ArrayList<>();
+
+	public PdfConverter addModule(PdfConvertModule module) {
+		module.setPdfSource(pdfSource);
+		modules.add(module);
+		module.execute();
+		return this;
+	}
+
+	public PdfConverter(PdfSource pdfSource) {
+		this.pdfSource = pdfSource;
+	}
+
+	public Pdf convert(PdfSource pdfSource) {
+		return new Pdf(pdfSource.getOutputFile());
 	}
 }
