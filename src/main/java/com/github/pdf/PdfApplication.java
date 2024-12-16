@@ -19,6 +19,7 @@ public class PdfApplication {
 			.addModule(new ImageConvertModule())
 			.addModule(new PasswordBasedEncryptModule("qwer1234", "qwer1234"));
 
-		pdfConverter.convert(pdfSource);
+		// pdf 파일 반환
+		Pdf pdf = pdfConverter.convert(pdfSource);
 	}
 }
