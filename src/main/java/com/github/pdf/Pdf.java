@@ -7,4 +7,8 @@ public class Pdf {
 	public Pdf(byte[] bytes) {
 		this.bytes = bytes;
 	}
+
+	public byte[] getBytes() {
+		return bytes;
+	}
 }

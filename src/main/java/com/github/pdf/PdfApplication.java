@@ -21,5 +21,6 @@ public class PdfApplication {
 
 		// pdf 파일 반환
 		Pdf pdf = pdfConverter.convert(pdfSource);
+		pdf.getBytes();
 	}
 }
