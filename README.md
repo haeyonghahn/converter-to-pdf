@@ -5,6 +5,8 @@
 
 ### 🏭 설치 방법
 
+---
+
 ### 💻 사용 방법
 ```java
 public static void main(String[] args) {
@@ -23,6 +25,8 @@ public static void main(String[] args) {
 ```java
 pdf.getBytes();
 ```
+
+---
 
 ### 📖 라이센스
 This project is licensed under the MIT License.   
