@@ -4,6 +4,19 @@
 ---
 
 ### 🏭 설치 방법
+#### Maven
+```
+<dependency>
+    <groupId>io.github.haeyonghahn</groupId>
+    <artifactId>converter-to-pdf</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+#### Gradle
+```
+implementation group: 'io.github.haeyonghahn', name: 'converter-to-pdf', version: '1.0.0'
+```
 
 ---
 
