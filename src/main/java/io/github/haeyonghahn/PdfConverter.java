@@ -22,6 +22,6 @@ public class PdfConverter {
 	}
 
 	public Pdf convert(PdfSource pdfSource) {
-		return new Pdf(pdfSource.getOutputFile());
+		return new Pdf(pdfSource.getOutputFile(), pdfSource.getOutputLength());
 	}
 }

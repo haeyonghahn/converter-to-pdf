@@ -8,7 +8,11 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.apache.pdfbox.io.IOUtils;
+import com.lowagie.text.Document;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfWriter;
 
 import io.github.haeyonghahn.PdfConvertModule;
 import io.github.haeyonghahn.constant.PdfConvertConstant;
@@ -16,11 +20,6 @@ import io.github.haeyonghahn.constant.PdfPageOrientation;
 import io.github.haeyonghahn.constant.PdfPageSize;
 import io.github.haeyonghahn.source.ImageSource;
 import io.github.haeyonghahn.source.PdfSource;
-import com.lowagie.text.Document;
-import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.PdfWriter;
 
 public class ImageConvertModule implements PdfConvertModule {
 
@@ -41,12 +40,13 @@ public class ImageConvertModule implements PdfConvertModule {
 		File file = sourcePath.toFile();
 
 		try (InputStream is = new FileInputStream(file)) {
-			byte[] fileData = IOUtils.toByteArray(is);
+			byte[] fileData = is.readAllBytes();
 			String outputPath = tempPath + "/" + createFileName + ".pdf";
 			createPdf(fileData, tempPath, createFileName);
 
 			pdfSource.setOutputFile(fileData);
 			pdfSource.setOutputPath(outputPath);
+			pdfSource.setOutputLength(fileData.length);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

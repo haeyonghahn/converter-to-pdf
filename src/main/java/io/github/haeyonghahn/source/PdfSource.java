@@ -11,6 +11,7 @@ public abstract class PdfSource {
 	private PdfPageSize pdfPageSize = PdfPageSize.A4;
 	private byte[] outputFile;
 	private String outputPath;
+	private long outputLength;
 
 	public String getOriginalFileName() {
 		return originalFileName;
@@ -58,5 +59,13 @@ public abstract class PdfSource {
 
 	public void setOutputPath(String outputPath) {
 		this.outputPath = outputPath;
+	}
+
+	public long getOutputLength() {
+		return outputLength;
+	}
+
+	public void setOutputLength(long outputLength) {
+		this.outputLength = outputLength;
 	}
 }
