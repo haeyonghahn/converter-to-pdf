@@ -45,6 +45,6 @@ jobs:
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          VERSION: ${{ needs.extract-version.outputs.version }}
         run: |
+          chmod +x ./gradlew
           ./gradlew clean publish
