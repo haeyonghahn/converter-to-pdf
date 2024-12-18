@@ -29,7 +29,7 @@ pdf.getBytes();
 ---
 
 ### 📖 라이센스
-This project is licensed under the MIT License.   
+This project is licensed under the [MIT License](https://github.com/haeyonghahn/converter-to-pdf/blob/master/LICENSE).   
 Feel free to use, modify, and distribute it as per the license terms.
 
 © 2024 [haeyong Hahn]. All rights reserved.
