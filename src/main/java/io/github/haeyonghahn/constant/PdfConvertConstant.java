@@ -1,4 +1,4 @@
-package com.github.pdf.constant;
+package io.github.haeyonghahn.constant;
 
 import java.io.File;
 import java.net.URISyntaxException;

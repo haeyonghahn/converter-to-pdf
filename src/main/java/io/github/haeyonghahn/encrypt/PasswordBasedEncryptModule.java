@@ -1,4 +1,4 @@
-package com.github.pdf.encrypt;
+package io.github.haeyonghahn.encrypt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,8 +7,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 
-import com.github.pdf.PdfConvertModule;
-import com.github.pdf.source.PdfSource;
+import io.github.haeyonghahn.PdfConvertModule;
+import io.github.haeyonghahn.source.PdfSource;
 
 public class PasswordBasedEncryptModule implements PdfConvertModule {
 

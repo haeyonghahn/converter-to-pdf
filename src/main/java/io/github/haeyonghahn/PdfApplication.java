@@ -1,12 +1,12 @@
-package com.github.pdf;
+package io.github.haeyonghahn;
 
 import java.io.File;
 
-import com.github.pdf.constant.PdfConvertConstant;
-import com.github.pdf.converter.ImageConvertModule;
-import com.github.pdf.encrypt.PasswordBasedEncryptModule;
-import com.github.pdf.source.ImageSource;
-import com.github.pdf.source.PdfSource;
+import io.github.haeyonghahn.constant.PdfConvertConstant;
+import io.github.haeyonghahn.converter.ImageConvertModule;
+import io.github.haeyonghahn.encrypt.PasswordBasedEncryptModule;
+import io.github.haeyonghahn.source.ImageSource;
+import io.github.haeyonghahn.source.PdfSource;
 
 public class PdfApplication {
 
@@ -19,7 +19,6 @@ public class PdfApplication {
 			.addModule(new ImageConvertModule())
 			.addModule(new PasswordBasedEncryptModule("qwer1234", "qwer1234"));
 
-		// pdf 파일 반환
 		Pdf pdf = pdfConverter.convert(pdfSource);
 		pdf.getBytes();
 	}

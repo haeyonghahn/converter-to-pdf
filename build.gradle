@@ -1,13 +1,22 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
-    id 'java'
+    id("java")
+    id("com.vanniktech.maven.publish") version "0.28.0"
+    id("signing")
 }
 
-group 'com.innercircle'
-version '1.0-SNAPSHOT'
-
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+signing {
+    useInMemoryPgpKeys(
+        System.getenv("GPG_PRIVATE_KEY"),
+        System.getenv("GPG_PASSPHRASE")
+    )
+    sign(publishing.publications)
 }
 
 repositories {
@@ -15,7 +24,6 @@ repositories {
 }
 
 dependencies {
-
     implementation group: 'com.lowagie', name: 'itext', version: '2.0.7'
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
 
@@ -23,6 +31,40 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-test {
+tasks.test {
     useJUnitPlatform()
+}
+
+mavenPublishing {
+    coordinates("io.github.haeyonghahn", "converter-to-pdf", "1.0.0")
+
+    pom {
+        name.set(project.rootProject.name)
+        inceptionYear.set("2024")
+        url.set("https://github.com/haeyonghahn/converter-to-pdf.git")
+
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://github.com/haeyonghahn/converter-to-pdf.git")
+                distribution.set("repo")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("haeyonghahn")
+                name.set("HaeYong Hahn")
+                email.set("yong80211@gmail.com")
+            }
+        }
+
+        scm {
+            connection.set("scm:git:git://github.com/haeyonghahn/converter-to-pdf.git")
+            developerConnection.set("scm:git:ssh://git@github.com:haeyonghahn/converter-to-pdf.git")
+            url.set("https://github.com/haeyonghahn/converter-to-pdf.git")
+        }
+    }
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 }

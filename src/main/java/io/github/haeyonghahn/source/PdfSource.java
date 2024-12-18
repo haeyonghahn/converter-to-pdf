@@ -1,7 +1,7 @@
-package com.github.pdf.source;
+package io.github.haeyonghahn.source;
 
-import com.github.pdf.constant.PdfPageOrientation;
-import com.github.pdf.constant.PdfPageSize;
+import io.github.haeyonghahn.constant.PdfPageOrientation;
+import io.github.haeyonghahn.constant.PdfPageSize;
 
 public abstract class PdfSource {
 
