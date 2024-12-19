@@ -15,7 +15,7 @@
 
 #### Gradle
 ```kotlin
-implementation group: 'io.github.haeyonghahn', name: 'converter-to-pdf', version: '1.0.0'
+implementation 'io.github.haeyonghahn:converter-to-pdf:1.0.0'
 ```
 
 ---
