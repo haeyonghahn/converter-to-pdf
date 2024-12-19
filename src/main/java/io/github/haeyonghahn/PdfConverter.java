@@ -25,17 +25,19 @@ public class PdfConverter {
 
 	public PdfConverter(PdfSource pdfSource) {
 		String tempPath = PdfConvertConstant.getTemporaryDirectory();
-		Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfSource.getOriginalFileName()));
-		File file = sourcePath.toFile();
-
-		try (InputStream is = new FileInputStream(file)) {
+		try {
+			Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfSource.getOriginalFileName()));
+			File file = sourcePath.toFile();
+			InputStream is = new FileInputStream(file);
 			byte[] fileData = is.readAllBytes();
 			String outputPath = tempPath + pdfSource.getNewFileName();
 			pdfSource.setOutputBytes(fileData);
 			pdfSource.setOutputPath(outputPath);
 			pdfSource.setOutputLength(fileData.length);
+
+			is.close();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("File Not found. " + tempPath + pdfSource.getOriginalFileName());
 		}
 		this.pdfSource = pdfSource;
 	}
