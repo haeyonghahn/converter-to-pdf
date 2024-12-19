@@ -9,8 +9,4 @@ public class PdfConvertConstant {
 			return System.getProperty("temp.dir");
 		}
 	}
-
-	public static String getFontDirectory() {
-		return System.getProperty("user.dir") + "/src/main/resources/font/Pretendard-Regular.ttf";
-	}
 }
