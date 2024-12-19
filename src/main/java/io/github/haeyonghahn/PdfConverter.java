@@ -1,9 +1,15 @@
 package io.github.haeyonghahn;
 
+import io.github.haeyonghahn.constant.PdfConvertConstant;
+import io.github.haeyonghahn.source.PdfSource;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.github.haeyonghahn.source.PdfSource;
 
 public class PdfConverter {
 
@@ -18,10 +24,23 @@ public class PdfConverter {
 	}
 
 	public PdfConverter(PdfSource pdfSource) {
+		String tempPath = PdfConvertConstant.getTemporaryDirectory();
+		Path sourcePath = Paths.get(String.format("%s/%s", tempPath, pdfSource.getOriginalFileName()));
+		File file = sourcePath.toFile();
+
+		try (InputStream is = new FileInputStream(file)) {
+			byte[] fileData = is.readAllBytes();
+			String outputPath = tempPath + pdfSource.getNewFileName();
+			pdfSource.setOutputBytes(fileData);
+			pdfSource.setOutputPath(outputPath);
+			pdfSource.setOutputLength(fileData.length);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		this.pdfSource = pdfSource;
 	}
 
 	public Pdf convert(PdfSource pdfSource) {
-		return new Pdf(pdfSource.getOutputFile(), pdfSource.getOutputLength());
+		return new Pdf(pdfSource.getOutputBytes(), pdfSource.getOutputLength());
 	}
 }

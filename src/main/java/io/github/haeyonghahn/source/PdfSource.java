@@ -6,10 +6,12 @@ import io.github.haeyonghahn.constant.PdfPageSize;
 public abstract class PdfSource {
 
 	private String originalFileName;
+	private String newFileName;
 	private String originalExtension;
 	private PdfPageOrientation pdfPageOrientation = PdfPageOrientation.DEFAULT;
 	private PdfPageSize pdfPageSize = PdfPageSize.A4;
-	private byte[] outputFile;
+
+	private byte[] outputBytes;
 	private String outputPath;
 	private long outputLength;
 
@@ -19,6 +21,14 @@ public abstract class PdfSource {
 
 	public void setOriginalFileName(String originalFileName) {
 		this.originalFileName = originalFileName;
+	}
+
+	public String getNewFileName() {
+		return newFileName;
+	}
+
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
 	}
 
 	public String getOriginalExtension() {
@@ -45,12 +55,12 @@ public abstract class PdfSource {
 		this.pdfPageSize = pdfPageSize;
 	}
 
-	public byte[] getOutputFile() {
-		return outputFile;
+	public byte[] getOutputBytes() {
+		return outputBytes;
 	}
 
-	public void setOutputFile(byte[] outputFile) {
-		this.outputFile = outputFile;
+	public void setOutputBytes(byte[] outputBytes) {
+		this.outputBytes = outputBytes;
 	}
 
 	public String getOutputPath() {
@@ -67,5 +77,13 @@ public abstract class PdfSource {
 
 	public void setOutputLength(long outputLength) {
 		this.outputLength = outputLength;
+	}
+
+	protected String getFileExtension(String fileName) {
+		String extension = null;
+		int i = fileName.lastIndexOf('.');
+		if (i > 0)
+			extension = fileName.substring(i + 1);
+		return extension;
 	}
 }

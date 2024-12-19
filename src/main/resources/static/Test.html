@@ -1,0 +1,218 @@
+<style>
+  .erpTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 10pt;
+    table-layout: fixed !important;
+    font-family: '맑은 고딕';
+    box-sizing: border-box;
+  }
+
+  .erpTable tr {
+    box-sizing: border-box;
+  }
+
+  .erpTable th {
+    font-size: 9pt;
+    background-color: #D9D9D9;
+    font-weight: normal;
+    text-align: left;
+    height: 35px;
+    padding-left: 5px;
+    box-sizing: border-box;
+  }
+
+  .erpTable td {
+    font-size: 9pt;
+    height: 35px;
+    text-align: left;
+    padding-left: 5px;
+    box-sizing: border-box;
+  }
+
+  .erpTable .bgColor {
+    background-color: #DDEBF7;
+  }
+
+  .erpTable .cen {
+    text-align: center;
+    padding-left: 0px;
+  }
+
+  .erpTable .ar {
+    text-align: right;
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+
+  .erpTable .le {
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 0px;
+  }
+
+  .erpTable .fwb {
+    font-weight: bold;
+  }
+
+  .erpTable .bt {
+    border-top: 1px solid #b1b1b1;
+  }
+
+  .erpTable .br {
+    border-right: 1px solid #b1b1b1;
+  }
+
+  .erpTable .bb {
+    border-bottom: 1px solid #b1b1b1;
+  }
+
+  .erpTable .bl {
+    border-left: 1px solid #b1b1b1;
+  }
+
+  .erpTable.borAll {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b1b1b1;
+  }
+
+  .erpTable.borAll th {
+    border-style: solid;
+    border-width: 0px 1px 1px 0;
+    border-color: #b1b1b1;
+  }
+
+  .erpTable.borAll td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #b1b1b1;
+  }
+
+  .erpTable.borAll td:last-child {
+    border-right: none;
+  }
+
+  .erpTable_title {
+    font-family: '맑은 고딕';
+    font-size: 9pt;
+    margin: 0px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+  .erpTable_Box {
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    border-color: #b1b1b1;
+    margin: 0px;
+  }
+
+  @media print {
+    .erpTable.colRow td {
+      outline: 0.5px groove #b1b1b1;
+    }
+
+    .erpTable tr {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0">
+  <table class="erpTable mt20" border="1">
+    <colgroup>
+      <col width="11%">
+      <col width="11%">
+      <col width="10%">
+      <col width="13%">
+      <col width="7%">
+      <col width="12%">
+      <col width="12%">
+      <col width="12%">
+      <col width="12%">
+    </colgroup>
+    <tbody>
+      <tr>
+        <td class="cen bgColor" colspan="9">[기본정보]</td>
+      </tr>
+      <tr>
+        <th class="cen">회계일자</th>
+        <th class="cen">결의구분</th>
+        <th class="cen" colspan="3">결의내역</th>
+        <th class="cen">결의번호</th>
+        <th class="cen">공급가액</th>
+        <th class="cen">부가세</th>
+        <th class="cen">합계</th>
+      </tr>
+      <tr>
+        <td class="cen">2024-10-30</td>
+        <td class="cen">지출결의서</td>
+        <td class="cen" colspan="3"></td>
+        <td class="cen">RN2024100004</td>
+        <td class="ar">79,000</td>
+        <td class="ar">0</td>
+        <td class="ar">79,000</td>
+      </tr>
+      <tr>
+        <td class="cen bgColor" colspan="9">[지출 내역]</td>
+      </tr>
+      <tr>
+        <th class="cen">순번</th>
+        <td class="cen">1</td>
+        <th class="cen">적요</th>
+        <td class="cen" colspan="4">적요입니다</td>
+        <th class="cen">증빙유형</th>
+        <td class="cen">원증빙비용</td>
+      </tr>
+      <tr>
+        <th class="cen" colspan="2">예산단위</th>
+        <th class="cen" colspan="2">예산계정</th>
+        <th class="cen" colspan="2">비용센터</th>
+        <th class="cen">공급가액</th>
+        <th class="cen">세액</th>
+        <th class="cen">합계</th>
+      </tr>
+      <tr>
+        <td class="cen" colspan="2">FCM개발1팀</td>
+        <td class="cen" colspan="2">급여</td>
+        <td class="cen" colspan="2">BG_FCM개발1팀</td>
+        <td class="ar">79,000</td>
+        <td class="ar">0</td>
+        <td class="ar">79,000</td>
+      </tr>
+      <tr>
+        <th class="cen" colspan="2">거래처</th>
+        <th class="cen">결제방법</th>
+        <th class="cen">증빙일</th>
+        <th class="cen" colspan="2">자금예정일</th>
+        <th class="cen">은행명</th>
+        <th class="cen">계좌번호</th>
+        <th class="cen">예금주</th>
+      </tr>
+      <tr>
+        <td class="cen" colspan="2">상아패션</td>
+        <td class="cen">신용카드</td>
+        <td class="cen">2018-01-01</td>
+        <td class="cen" colspan="2">2018-02-05</td>
+        <td class="cen"></td>
+        <td class="cen"></td>
+        <td class="cen"></td>
+      </tr>
+      <tr>
+        <th class="cen" colspan="2">예산편성액(A)</th>
+        <th class="cen" colspan="2">기결의액(B)</th>
+        <th class="cen" colspan="3">결의액(C)</th>
+        <th class="cen" colspan="2">예산잔액(A-B-C)</th>
+      </tr>
+      <tr>
+        <td class="ar" colspan="2">0</td>
+        <td class="ar" colspan="2">119,000</td>
+        <td class="ar" colspan="3">79,000</td>
+        <td class="ar" colspan="2">-198,000</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
