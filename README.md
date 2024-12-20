@@ -33,11 +33,6 @@ public static void main(String[] args) {
 	Pdf pdf = pdfConverter.convert(pdfSource);
 }
 ```
-#### 결과 예시
-바이트 타입으로 pdf 파일을 사용할 수 있습니다.
-```java
-pdf.getBytes();
-```
 
 ---
 
