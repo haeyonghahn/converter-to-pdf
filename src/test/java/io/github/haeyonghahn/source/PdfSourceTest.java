@@ -15,7 +15,7 @@ public class PdfSourceTest {
 	@Test
 	void getFileExtension() throws IOException {
 		// given
-		File tempFile = File.createTempFile("test", ".jpg");
+		File tempFile = File.createTempFile("temp", ".jpg");
 		tempFile.deleteOnExit();
 
 		// when
