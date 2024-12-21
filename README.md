@@ -9,13 +9,13 @@
 <dependency>
     <groupId>io.github.haeyonghahn</groupId>
     <artifactId>converter-to-pdf</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
 #### Gradle
 ```kotlin
-implementation 'io.github.haeyonghahn:converter-to-pdf:1.0.0'
+implementation 'io.github.haeyonghahn:converter-to-pdf:0.0.1'
 ```
 
 ---
