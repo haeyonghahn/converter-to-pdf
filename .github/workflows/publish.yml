@@ -1,7 +1,7 @@
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - closed
     paths:
       - 'src/main/**'
       - 'build.gradle'
@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git Checkout
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         uses: actions/checkout@v3.0.2
 
       - uses: dorny/paths-filter@v2
@@ -25,6 +26,7 @@ jobs:
               - 'src/**'
               
       - name: Set up JDK 17
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         uses: actions/setup-java@v3
         with:
           distribution: zulu
@@ -32,6 +34,7 @@ jobs:
           cache: 'gradle'
 
       - name: Cache Gradle dependencies
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
@@ -40,11 +43,13 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Set up gradle.properties
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         run: |
           echo "mavenCentralUsername=${{ secrets.MAVEN_CENTRAL_USERNAME }}" >> $GITHUB_WORKSPACE/gradle.properties
           echo "mavenCentralPassword=${{ secrets.MAVEN_CENTRAL_PASSWORD }}" >> $GITHUB_WORKSPACE/gradle.properties
 
       - name: Deploy to Maven Central
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -55,9 +60,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         uses: actions/checkout@v3
 
       - name: Extract Version From Branch Name
+        if: github.event.pull_request.merged == "true" && github.event.pull_request.base.ref == "master"
         id: extract_version
         run: |
           echo "pull_request: ${{ github.event.pull_request.head.ref }}"
