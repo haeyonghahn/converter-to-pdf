@@ -60,20 +60,27 @@ jobs:
       - name: Extract Version From Branch Name
         id: extract_version
         run: |
-          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          echo "pull_request: ${{ github.event.pull_request.head.ref }}"
           
-          echo "Branch name: $BRANCH_NAME"
+          if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
           
-          if [[ "$BRANCH_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
-            VERSION="${BASH_REMATCH[1]}"
-            echo "VERSION: $VERSION"
-          else
-            VERSION="No version in branch name"
+            echo "BRANCH_NAME: $BRANCH_NAME"
+          
+            if [[ "$BRANCH_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+              VERSION="${BASH_REMATCH[1]}"
+              echo "VERSION: $VERSION"
+            else
+              VERSION="No version in branch name"
+            fi
+          
+            echo "::set-output name=version::$VERSION"
+          else 
+            echo "No merge event detected"
           fi
-          
-          echo "::set-output name=version::$VERSION"
 
       - name: Create Release
+        if: steps.extract_version.outputs.version != ''
         run: |
           TAG_NAME="v${VERSION}"
           echo "TAG_NAME: $TAG_NAME"
