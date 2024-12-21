@@ -38,7 +38,6 @@ tasks.test {
 mavenPublishing {
     coordinates("io.github.haeyonghahn", "converter-to-pdf", "0.0.2")
 
-
     pom {
         name.set(project.rootProject.name)
         description.set("Library that converts files to PDF")
