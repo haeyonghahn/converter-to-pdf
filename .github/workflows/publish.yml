@@ -60,7 +60,7 @@ jobs:
       - name: Extract Version From Branch Name
         id: extract_version
         run: |
-          BRANCH_NAME="${{ github.head_ref }}"
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
           
           echo "Branch name: $BRANCH_NAME"
           
