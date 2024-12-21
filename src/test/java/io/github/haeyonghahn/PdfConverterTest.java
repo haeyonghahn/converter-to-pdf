@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,11 @@ import io.github.haeyonghahn.source.PdfSource;
 
 @DisplayName("PdfConverter 테스트")
 public class PdfConverterTest {
+
+	@BeforeEach
+	public void setUp() {
+		System.setProperty("temp.dir", System.getProperty("java.io.tmpdir"));
+	}
 
 	@DisplayName("파일이 없는 경우 pdfConverter를 생성할 수 없다.")
 	@Test
