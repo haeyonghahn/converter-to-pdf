@@ -14,7 +14,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3.0.2
@@ -48,7 +48,6 @@ jobs:
           echo "mavenCentralPassword=${{ secrets.MAVEN_CENTRAL_PASSWORD }}" >> $GITHUB_WORKSPACE/gradle.properties
 
       - name: Deploy to Maven Central
-        if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -57,7 +56,7 @@ jobs:
           ./gradlew clean publish
   release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -72,7 +71,7 @@ jobs:
           
             echo "BRANCH_NAME: $BRANCH_NAME"
           
-            if [[ "$BRANCH_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            if [[ "$BRANCH_NAME" =~ ^release\/v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
               VERSION="${BASH_REMATCH[1]}"
               echo "VERSION: $VERSION"
             else
