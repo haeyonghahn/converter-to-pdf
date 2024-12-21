@@ -35,6 +35,7 @@ public class PdfConverterTest {
 	@Test
 	void convert() throws IOException {
 		// given
+		System.out.println(PdfConvertConstant.getTemporaryDirectory());
 		File tempFile = File.createTempFile( "test", ".jpg", new File(PdfConvertConstant.getTemporaryDirectory()));
 		PdfSource pdfSource = new ImageSource(tempFile);
 

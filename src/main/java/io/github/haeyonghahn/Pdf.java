@@ -4,10 +4,12 @@ public class Pdf {
 
 	private final byte[] bytes;
 	private final long length;
+	private final String name;
 
-	public Pdf(byte[] bytes, long length) {
+	public Pdf(byte[] bytes, long length, String name) {
 		this.bytes = bytes;
 		this.length = length;
+		this.name = name;
 	}
 
 	public byte[] getBytes() {
@@ -16,5 +18,9 @@ public class Pdf {
 
 	public long getLength() {
 		return length;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

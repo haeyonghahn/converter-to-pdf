@@ -11,6 +11,6 @@ public class FakePdfConverter {
 	}
 
 	public Pdf convert(PdfSource pdfSource) {
-		return new Pdf(pdfSource.getOutputBytes(), pdfSource.getOutputLength());
+		return new Pdf(pdfSource.getOutputBytes(), pdfSource.getOutputLength(), pdfSource.getNewFileName());
 	}
 }
