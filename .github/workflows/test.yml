@@ -7,52 +7,6 @@ permissions:
   contents: write
 
 jobs:
-  push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Git Checkout
-        uses: actions/checkout@v3.0.2
-
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            application:
-              - 'build.gradle'
-              - 'src/**'
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 17
-          cache: 'gradle'
-
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Execute Gradle build
-        run: |
-          chmod +x ./gradlew
-          ./gradlew build --no-daemon
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: ./
-          push: true
-          tags: yong7317/converter-to-pdf:v0.0.4
   test:
     runs-on: ubuntu-latest
     steps:
@@ -84,7 +38,7 @@ jobs:
         uses: madrapps/jacoco-report@v1.2
         with:
           title: 📝 테스트 커버리지 리포트
-          paths: ${{ github.workspace }}build/jacoco/jacoco.xml
+          paths: ${{ github.workspace }}/build/jacoco/jacoco.xml
           token: ${{ github.token }}
           min-coverage-overall: 60
           min-coverage-changed-files: 60
