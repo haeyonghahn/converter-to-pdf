@@ -32,3 +32,13 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew test
+
+      - name: Add Test Coverage Report as Comment to the PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.2
+        with:
+          title: 📝 테스트 커버리지 리포트
+          paths: ${{ github.workspace }}build/jacoco/jacoco.xml
+          token: ${{ github.token }}
+          min-coverage-overall: 60
+          min-coverage-changed-files: 60

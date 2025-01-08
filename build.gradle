@@ -4,11 +4,16 @@ plugins {
     id("java")
     id("com.vanniktech.maven.publish") version "0.28.0"
     id("signing")
+    id("jacoco")
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+apply {
+    plugin("jacoco")
 }
 
 signing {
@@ -33,6 +38,18 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
+}
+
+tasks.jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required.set(true)
+        html.required.set(false)
+
+        xml.destination(file("build/jacoco/jacoco.xml"))
+        html.destination(file("build/jacoco/jacoco.html"))
+    }
 }
 
 mavenPublishing {
